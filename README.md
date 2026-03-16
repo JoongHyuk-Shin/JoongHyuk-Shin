@@ -88,6 +88,6 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 ---
 
 ### 📫 Connect with Me
-- [GitHub](https://github.com/Joshua-Shin)
+- [GitHub](https://github.com/JoongHyuk-Shin)
 - [LinkedIn](www.linkedin.com/in/joonghyuk-shin-631701201)
 - sjh910805@gmail.com
