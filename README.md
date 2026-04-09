@@ -38,7 +38,7 @@ PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
   Implemented Oracle-compatible functions/packages and conducted performance benchmarking; achieved measurable improvements including 50%+ gain for the median function through algorithm redesign.
 
 - **Vector DB & RAG**  
-  Built and deployed a schema-linking API (FastAPI + pgvector): ingests DB schema definitions (DD JSON), generates vector embeddings via Ollama, and returns semantically relevant tables for natural language queries using cosine similarity search. Deployed as a Docker Compose service (pgvector + app).
+  Built and deployed a schema-linking API (FastAPI + pgvector): ingests DB schema metadata (JSON), generates vector embeddings via Ollama, and returns semantically relevant tables for natural language queries using cosine similarity search. Deployed as a Docker Compose service (pgvector + app).
 
 - **High availability**  
   Designed PostgreSQL HA environments using Patroni and etcd for enterprise workloads.
