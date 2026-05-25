@@ -74,6 +74,9 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 ---
 
 ### 🏆 Achievements & Certifications
+- **Technical Writing**  
+  - **PostgreSQL Internals series** (in progress) — Writing a deep-dive series on PostgreSQL internals. Chapter 1 (Query Processing) in progress; published in English on [dev.to](https://dev.to/joonghyukshin) and in Korean on [velog](https://velog.io/@sjh910805/series).  
+
 - **Algorithms**
   - **Top 4.2%** Contributor on [Leetcode](https://leetcode.com/Joshua-Shin/) (Consecutive years: 2023, 2024)
     <br><br> ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=Joshua-Shin)`
@@ -89,5 +92,5 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 
 ### 📫 Connect with Me
 - [GitHub](https://github.com/JoongHyuk-Shin)
-- [LinkedIn](www.linkedin.com/in/joonghyuk-shin-631701201)
+- [LinkedIn](www.linkedin.com/in/joonghyuk-shin)
 - sjh910805@gmail.com
