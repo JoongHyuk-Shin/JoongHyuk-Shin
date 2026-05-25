@@ -25,14 +25,14 @@
 
 ### 💼 Work Experience
 
-#### **Tmax Tibero** | Database Engine Developer (Oct 2023 – Present)
+#### **Tmax Tibero** | Database Engine Developer (Oct 2023 - Present)
 
-**1) OpenSQL Team (Nov 2024 – Present)**
+**1) OpenSQL Team (Nov 2024 - Present)**
 
 PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
 
 - **Row-Level Security (DBMS_RLS)**  
-  Designed and implemented Oracle-compatible RLS as a **PostgreSQL C extension**, using **planner_hook** and **object_access_hook** for planner integration and runtime policy enforcement. Delivered transient-view–style predicate injection and definer-rights policy execution aligned with Oracle VPD semantics.
+  Designed and implemented Oracle-compatible RLS as a **PostgreSQL C extension**, using **planner_hook** and **object_access_hook** for planner integration and runtime policy enforcement. Delivered transient-view-style predicate injection and definer-rights policy execution aligned with Oracle VPD semantics.
 
 - **Oracle compatibility**  
   Implemented Oracle-compatible functions/packages and conducted performance benchmarking; achieved measurable improvements including 50%+ gain for the median function through algorithm redesign.
@@ -44,12 +44,12 @@ PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
   Designed PostgreSQL HA environments using Patroni and etcd for enterprise workloads.
 
 - **Cluster orchestration & scaling**  
-  Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and Command Pattern–based rollback for transactional reliability in distributed node lifecycle.
+  Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and Command Pattern-based rollback for transactional reliability in distributed node lifecycle.
 
 - **Debug / monitoring**  
   Built internal debug tooling to print PostgreSQL query trees during development.
 
-**2) SuperTibero Team (Oct 2023 – Oct 2024)**
+**2) SuperTibero Team (Oct 2023 - Oct 2024)**
 
 Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 
@@ -68,14 +68,14 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 ---
 
 ### 🎓 Education
-- **B.S. in Physics** – Yonsei University, Seoul
+- **B.S. in Physics**, Yonsei University, Seoul
   - Focus: **Statistical Mechanics**, Quantum Mechanics
 
 ---
 
 ### 🏆 Achievements & Certifications
 - **Technical Writing**  
-  - **PostgreSQL Internals series** (in progress) — Writing a deep-dive series on PostgreSQL internals. Chapter 1 (Query Processing) in progress; published in English on [dev.to](https://dev.to/joonghyukshin) and in Korean on [velog](https://velog.io/@sjh910805/series).  
+  - **PostgreSQL Internals series** (in progress). Writing a deep-dive series on PostgreSQL internals. Chapter 1 (Query Processing) in progress; published in English on [dev.to](https://dev.to/joonghyukshin) and in Korean on [velog](https://velog.io/@sjh910805/series).  
 
 - **Algorithms**
   - **Top 4.2%** Contributor on [Leetcode](https://leetcode.com/Joshua-Shin/) (Consecutive years: 2023, 2024)
