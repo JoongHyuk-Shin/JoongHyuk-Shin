@@ -43,6 +43,9 @@ PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
 - **High availability**  
   Designed PostgreSQL HA environments using Patroni and etcd for enterprise workloads.
 
+- **Connection routing**  
+  Extended a connection proxy to route read-only transactions (`BEGIN READ ONLY`) to replicas, offloading heavy reads from the primary. Diagnosed a customer-reported proxy CPU regression with a throughput-matched control experiment, isolating driver-induced primary routing skew as the real cause.
+
 - **Cluster orchestration & scaling**  
   Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and Command Pattern-based rollback for transactional reliability in distributed node lifecycle.
 
