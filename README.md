@@ -6,7 +6,7 @@
 ### 🚀 Summary
 - System-level software engineer specializing in database engine kernels and distributed coordination.
 - Expertise in extending PostgreSQL with C extensions, hooks (planner, object access), Vector/LLM integration, and Oracle-compatible features.
-- Contributor to PostgreSQL core: authored a patch committed for PG 20, with three more in the CommitFest review queue.
+- PostgreSQL contributor: authored a patch committed to master for PG 20, with three more in the CommitFest review queue.
 - Experience architecting distributed lifecycle engines with a focus on transactional state consistency and reliability.
 - Proficient in C, C++, Python, and Linux; solid foundation in algorithms, probability, and high-performance distributed system design.
 
@@ -79,7 +79,7 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 
 ### 🏆 Achievements & Certifications
 - **Open Source (PostgreSQL)**  
-  - Authored a core patch committed to master for PG 20 ([d5751c33cc3](https://postgr.es/c/d5751c33cc3)): recovery target GUC assign hooks no longer raise errors or derive cross-parameter state mid-assignment; the effective target is resolved once from the settled configuration. Reviewed by 8 community members over 10 revisions between April and July 2026, and credited as reviewer on the accompanying test-infrastructure commit.
+  - Authored a patch committed to PostgreSQL master for PG 20 ([d5751c33cc3](https://postgr.es/c/d5751c33cc3)): moved recovery-target validation out of the GUC assign hooks, so the effective recovery target is derived once from the settled configuration instead of depending on parameter assignment order.
   - Three further patches submitted to pgsql-hackers and registered in the CommitFest.
 
 - **Technical Writing**  
