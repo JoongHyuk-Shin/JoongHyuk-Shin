@@ -6,6 +6,7 @@
 ### 🚀 Summary
 - System-level software engineer specializing in database engine kernels and distributed coordination.
 - Expertise in extending PostgreSQL with C extensions, hooks (planner, object access), Vector/LLM integration, and Oracle-compatible features.
+- Contributor to PostgreSQL core: authored a patch committed for PG 20, with three more in the CommitFest review queue.
 - Experience architecting distributed lifecycle engines with a focus on transactional state consistency and reliability.
 - Proficient in C, C++, Python, and Linux; solid foundation in algorithms, probability, and high-performance distributed system design.
 
@@ -47,7 +48,7 @@ PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
   Extended a connection proxy to route read-only transactions (`BEGIN READ ONLY`) to replicas, offloading heavy reads from the primary. Diagnosed a customer-reported proxy CPU regression with a throughput-matched control experiment, isolating driver-induced primary routing skew as the real cause.
 
 - **Cluster orchestration & scaling**  
-  Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and Command Pattern-based rollback for transactional reliability in distributed node lifecycle.
+  Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and idempotent compensating rollback for transactional reliability in distributed node lifecycle.
 
 - **Debug / monitoring**  
   Built internal debug tooling to print PostgreSQL query trees during development.
@@ -77,6 +78,10 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 ---
 
 ### 🏆 Achievements & Certifications
+- **Open Source (PostgreSQL)**  
+  - Authored a core patch committed to master for PG 20 ([d5751c33cc3](https://postgr.es/c/d5751c33cc3)): recovery target GUC assign hooks no longer raise errors or derive cross-parameter state mid-assignment; the effective target is resolved once from the settled configuration. Reviewed by 8 community members over 10 revisions between April and July 2026, and credited as reviewer on the accompanying test-infrastructure commit.
+  - Three further patches submitted to pgsql-hackers and registered in the CommitFest.
+
 - **Technical Writing**  
   - **PostgreSQL Internals series** (in progress). Writing a deep-dive series on PostgreSQL internals. Chapter 1 (Query Processing) complete: 25 sections, published in English on [dev.to](https://dev.to/joonghyukshin) and Korean on [velog](https://velog.io/@sjh910805/series). Chapter 2 (Storage & Access Methods) in progress.  
 
