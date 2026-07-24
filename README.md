@@ -79,7 +79,7 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 
 ### 🏆 Achievements & Certifications
 - **Open Source (PostgreSQL)**  
-  - Authored a patch committed to PostgreSQL master for PG 20 ([d5751c33cc3](https://postgr.es/c/d5751c33cc3)): moved recovery-target validation out of the GUC assign hooks, so the effective recovery target is derived once from the settled configuration instead of depending on parameter assignment order.
+  - Authored a patch committed to PostgreSQL master for PG 20 ([d5751c33cc3](https://git.postgresql.org/cgit/postgresql.git/commit/?id=d5751c33cc3)): moved recovery-target validation out of the GUC assign hooks, so the effective recovery target is derived once from the settled configuration instead of depending on parameter assignment order.
   - Three further patches submitted to pgsql-hackers and registered in the CommitFest.
 
 - **Technical Writing**  
