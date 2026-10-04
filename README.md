@@ -6,20 +6,22 @@ Seoul, South Korea | sjh910805@gmail.com | [GitHub](https://github.com/JoongHyuk
 ---
 
 ### 🚀 Summary
-- PostgreSQL contributor: authored a recovery-target fix committed to master for PostgreSQL 20; submitted two further patches on hot-standby buffer-pin waits and WAL recovery boundaries.
-- Developed SQL compiler modules and PostgreSQL C extensions, including Oracle-compatible row-level security.
-- Built lifecycle automation for Patroni/etcd PostgreSQL clusters on Azure: scale-out with rollback, scale-in, and a two-way transition between a single node and an HA cluster.
+- **Recovery & replication:** Authored a recovery-target fix committed to PostgreSQL master for PostgreSQL 20; submitted two further patches on hot-standby buffer-pin waits and WAL recovery boundaries.
+- **Extensions & security:** Designed and implemented Oracle-compatible row-level security (DBMS_RLS) as a PostgreSQL C extension, using planner_hook for predicate injection and object_access_hook for policy cleanup on table drops.
+- **Query processing:** Developed parser, query transformer, and cost-based optimizer modules for a proprietary RDBMS, including predicate pull-up and push-down across 22 logical-plan node types.
+- **High availability:** Built lifecycle automation for Patroni/etcd PostgreSQL clusters on Azure: scale-out with rollback, scale-in, and a two-way transition between a single node and an HA cluster.
 
 ---
 
 ### 🛠 Skills
 | Area | Details |
 |------|--------|
+| **Recovery & Replication** | WAL/PITR, physical replication (hot standby) |
+| **Extensions & Security** | PostgreSQL C extensions, planner hook, object access hook, row-level security, Oracle-compatible functions |
+| **Query Processing** | SQL compilation, query rewriting, predicate pull-up/push-down, cost-based optimization, plan caching |
+| **High Availability** | Patroni, etcd, cluster orchestration (IaC), read-replica connection routing |
 | **Languages** | C, C++, Python, SQL, Java, Bash |
-| **DB Internals** | SQL compilation, query rewriting, cost-based optimization, plan caching, WAL/PITR, physical replication, vector search |
-| **PostgreSQL** | C extensions, planner hook, object access hook, RLS, parser/planner integration |
-| **Distributed** | High availability (Patroni, etcd), cluster orchestration (IaC) |
-| **Tools** | Linux, Docker, Git, Azure SDK and ARM templates |
+| **Tools** | Linux, Docker, Git, Azure SDK and ARM templates, pgvector |
 
 ---
 
