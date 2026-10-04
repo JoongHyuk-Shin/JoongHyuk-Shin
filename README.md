@@ -1,26 +1,25 @@
 # JoongHyuk Shin
-**System-level Software Engineer specializing in Database Engine Kernels & Distributed Coordination**
+**Database Engine Developer | PostgreSQL contributor**
+
+Seoul, South Korea | sjh910805@gmail.com | [GitHub](https://github.com/JoongHyuk-Shin) | [LinkedIn](https://www.linkedin.com/in/joonghyuk-shin)
 
 ---
 
 ### 🚀 Summary
-- System-level software engineer specializing in database engine kernels and distributed coordination.
-- Expertise in extending PostgreSQL with C extensions, hooks (planner, object access), Vector/LLM integration, and Oracle-compatible features.
-- PostgreSQL contributor: authored a patch committed to master for PG 20, with three more in the CommitFest review queue.
-- Experience architecting distributed lifecycle engines with a focus on transactional state consistency and reliability.
-- Proficient in C, C++, Python, and Linux; solid foundation in algorithms, probability, and high-performance distributed system design.
+- PostgreSQL contributor: authored a recovery-target fix committed to master for PostgreSQL 20; submitted two further patches on hot-standby buffer-pin waits and WAL recovery boundaries.
+- Developed SQL compiler modules and PostgreSQL C extensions, including Oracle-compatible row-level security.
+- Built lifecycle automation for Patroni/etcd PostgreSQL clusters on Azure: scale-out with rollback, scale-in, and a two-way transition between a single node and an HA cluster.
 
 ---
 
 ### 🛠 Skills
 | Area | Details |
 |------|--------|
-| **Languages** | C, C++ (Modern), Python, SQL, Java, Bash |
-| **DB Internals** | PostgreSQL/Oracle engine core, query compiler, optimizer (CBO), vector search |
+| **Languages** | C, C++, Python, SQL, Java, Bash |
+| **DB Internals** | SQL compilation, query rewriting, cost-based optimization, plan caching, WAL/PITR, physical replication, vector search |
 | **PostgreSQL** | C extensions, planner hook, object access hook, RLS, parser/planner integration |
-| **Distributed** | Consensus (etcd/Raft), high availability, cluster orchestration (IaC) |
-| **Core** | Probability, high-performance algorithms |
-| **Tools** | Linux (system-level), Docker, Git, AWS/Azure (SDK/API integration) |
+| **Distributed** | High availability (Patroni, etcd), cluster orchestration (IaC) |
+| **Tools** | Linux, Docker, Git, Azure SDK and ARM templates |
 
 ---
 
@@ -30,44 +29,76 @@
 
 **1) OpenSQL Team (Nov 2024 - Present)**
 
-PostgreSQL-based managed RDBMS with Oracle compatibility and vector DB features.
+PostgreSQL-based RDBMS with Oracle compatibility and vector DB features.
 
 - **Row-Level Security (DBMS_RLS)**  
-  Designed and implemented Oracle-compatible RLS as a **PostgreSQL C extension**, using **planner_hook** and **object_access_hook** for planner integration and runtime policy enforcement. Delivered transient-view-style predicate injection and definer-rights policy execution aligned with Oracle VPD semantics.
+  Designed and implemented Oracle-compatible DBMS_RLS in a **PostgreSQL C extension**, using **planner_hook** for transient-view predicate injection and definer-rights policy functions. Added policy checks for rows written by INSERT/UPDATE when write validation is enabled, and automatic policy cleanup on table drops through **object_access_hook**.
+  Added recursive policy application within predicate subqueries and column-sensitive policy activation through `sec_relevant_cols`.
 
 - **Oracle compatibility**  
-  Implemented Oracle-compatible functions/packages and conducted performance benchmarking; achieved measurable improvements including up to 60% gain for the median function through algorithm redesign.
+  Implemented and extended Oracle-compatible functions and packages (NVL/NVL2, EXISTSNODE, DUMP, DBMS_RANDOM, DBMS_ALERT).
+  Replaced the full sort in the median aggregate with quickselect, improving performance by up to 60% in a 10M-row test.
 
-- **Vector DB & RAG**  
-  Built and deployed a schema-linking API (FastAPI + pgvector): ingests DB schema metadata (JSON), generates vector embeddings via Ollama, and returns semantically relevant tables for natural language queries using cosine similarity search. Deployed as a Docker Compose service (pgvector + app).
+- **C extension debugging**  
+  Fixed an NVL-extension segmentation fault caused by returning inside `PG_TRY` before `PG_END_TRY` restored exception state; added a regression test that triggers an error in a subsequent query.
+
+- **Query-tree debugging**  
+  Built internal debug tooling to print PostgreSQL query trees during development.
+
+- **Cluster orchestration & scaling**  
+  Designed and built a Python cluster-scaling tool invoked by the control plane and operators, with a cloud-provider interface and Azure ARM provisioning: it adds and removes Patroni nodes, polls etcd until the new member is running, and rolls back a failed scale-out with an idempotent VM delete.
+  Integrated lifecycle progress and result reporting with the control plane, including bounded retries for transient reporting failures.
+  Added a cumulative stall-time limit to Patroni join monitoring, allowing progressing replication to continue while failed joins trigger rollback.
 
 - **High availability**  
   Designed PostgreSQL HA environments using Patroni and etcd for enterprise workloads.
+  Automated two-way Azure transitions between a single PostgreSQL node and a Patroni HA cluster with two data nodes and an etcd witness, including learner promotion and VIP configuration/removal.
+  Implemented failed-expansion rollback that removes added etcd members before deleting the new data-node VM, configured proxy VIP failover to the new leader, and added real-cluster end-to-end tests for both directions.
 
 - **Connection routing**  
-  Extended a connection proxy to route read-only transactions (`BEGIN READ ONLY`) to replicas, offloading heavy reads from the primary. Diagnosed a customer-reported proxy CPU regression with a throughput-matched control experiment, isolating driver-induced primary routing skew as the real cause.
+  Extended a pgcat-based Rust proxy to route `BEGIN READ ONLY` transactions to replicas when the pool disables primary reads; added a unit test covering read-only and read/write transaction routing.
+  In a fixed-rate pgJDBC benchmark, shifted all tested recursive-CTE reads from primary to replica while UPDATEs stayed on primary.
 
-- **Cluster orchestration & scaling**  
-  Architected a Multi-CSP IaC (ARM/CloudFormation) scaling engine using etcd watch for real-time state sync and idempotent compensating rollback for transactional reliability in distributed node lifecycle.
+- **Performance diagnosis**  
+  Investigated a report of higher PostgreSQL backend CPU through the proxy using a throughput-matched experiment; reproduced pgJDBC-induced primary routing skew and measured comparable backend CPU for direct and proxied connections.
 
-- **Debug / monitoring**  
-  Built internal debug tooling to print PostgreSQL query trees during development.
+- **Vector search (schema linking)**  
+  Built a schema-linking API using FastAPI, pgvector and Ollama to embed JSON schema metadata and retrieve relevant tables through cosine-similarity search; packaged it with Docker Compose.
 
 **2) SuperTibero Team (Oct 2023 - Oct 2024)**
 
-Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
+Proprietary RDBMS with distributed storage; worked on SQL compiler modules.
 
 - **SQL compiler**  
-  Built parser, query transformer, and cost-based optimizer.
+  Developed modules of the parser, query transformer, and cost-based optimizer.
+  Reduced AST child traversal from two passes to one and outer-join relationship setup from O(n) to O(1).
 
 - **Query optimization**  
-  Implemented index range scan, predicate pushdown, sort-skip optimization, and execution plan cache.
+  Designed and implemented predicate pull-up and push-down across 22 logical-plan node types, with join-type-aware branch selection, and IN-subquery-to-EXISTS conversion.
+  Designed and implemented predicate derivation for non-equi joins and compound expressions, and predicate distribution into set-operation query blocks.
+  Designed and implemented null-aware self-comparison rewrites and elimination of redundant or contradictory predicates.
+  Fixed index range scan cardinality estimation that had forced index full scans for `<` predicates, repaired sort elimination, and improved plan cache matching.
+  Fixed query-block expression-ID allocation and plan-cache invalidation for dropped sequences.
 
-- **Privilege & authentication**  
-  Designed and implemented privilege check and authentication for secure SQL execution.
+- **Privilege check**  
+  Designed and implemented the privilege check at hard parse for SELECT, INSERT, UPDATE, DELETE, and MERGE, caching permissions per level to cut repeated checks.
 
-- **Performance**  
-  Delivered query transformation features that improved index scan opportunities and reduced redundant operations.
+---
+
+### Open Source
+- **PostgreSQL**  
+  - Authored a recovery-target fix committed to PostgreSQL master for PostgreSQL 20 ([d5751c33cc3](https://git.postgresql.org/cgit/postgresql.git/commit/?id=d5751c33cc3)): prevented GUC assignment order from clearing a configured recovery target, moved cross-parameter validation out of assign hooks, and added recovery tests.
+  - Credited as reviewer on a committed PostgreSQL test-framework change that preserved postmaster cleanup when tests supplied startup options ([1009339b3ac](https://git.postgresql.org/cgit/postgresql.git/commit/?id=1009339b3ac)).
+  - Submitted "Prevent repeated deadlock-check signals in standby buffer pin waits" to pgsql-hackers and the November 2026 CommitFest.
+  - Submitted "Add recovery boundary WAL record for database and tablespace commands" to pgsql-hackers and the November 2026 CommitFest.
+
+- **TimescaleDB**  
+  - Fixed an assertion failure in `add_dimension()` when the hypertable argument is NULL; it now raises an error instead ([#10327](https://github.com/timescale/timescaledb/pull/10327), released in 2.29.1 and 2.30.0).
+
+---
+
+### Technical Writing
+- Published Chapter 1 (Query Processing; 25 sections) of a PostgreSQL internals series in English ([dev.to](https://dev.to/joonghyukshin)) and Korean ([velog](https://velog.io/@sjh910805/series)); Chapter 2 (Storage & Access Methods) in progress.
 
 ---
 
@@ -78,16 +109,9 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 ---
 
 ### 🏆 Achievements & Certifications
-- **Open Source (PostgreSQL)**  
-  - Authored a patch committed to PostgreSQL master for PG 20 ([d5751c33cc3](https://git.postgresql.org/cgit/postgresql.git/commit/?id=d5751c33cc3)): moved recovery-target validation out of the GUC assign hooks, so the effective recovery target is derived once from the settled configuration instead of depending on parameter assignment order.
-  - Three further patches submitted to pgsql-hackers and registered in the CommitFest.
-
-- **Technical Writing**  
-  - **PostgreSQL Internals series** (in progress). Writing a deep-dive series on PostgreSQL internals. Chapter 1 (Query Processing) complete: 25 sections, published in English on [dev.to](https://dev.to/joonghyukshin) and Korean on [velog](https://velog.io/@sjh910805/series). Chapter 2 (Storage & Access Methods) in progress.  
-
 - **Algorithms**
-  - **Top 4.2%** Contributor on [Leetcode](https://leetcode.com/Joshua-Shin/) (Consecutive years: 2023, 2024)
-    <br><br> ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=Joshua-Shin)`
+  - [LeetCode](https://leetcode.com/Joshua-Shin/): 100 Days Badge in 2023 and 2024.
+    <br><br> ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=Joshua-Shin)
   - **Top 3.5%** on [Baekjoon](https://solved.ac/profile/sjh910805) - Platinum V
     
      <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=sjh910805">
@@ -95,10 +119,3 @@ Enterprise RDBMS with distributed storage; focused on SQL compiler modules.
 - **Certifications**
   - Engineer Information Processing (HRDK)
   - SQL Developer (SQLD, Kdata)
-
----
-
-### 📫 Connect with Me
-- [GitHub](https://github.com/JoongHyuk-Shin)
-- [LinkedIn](www.linkedin.com/in/joonghyuk-shin)
-- sjh910805@gmail.com
