@@ -112,7 +112,7 @@ Proprietary RDBMS with distributed storage; worked on SQL compiler modules.
 
 ### 🏆 Achievements & Certifications
 - **Algorithms**
-  - [LeetCode](https://leetcode.com/Joshua-Shin/): 100 Days Badge in 2023 and 2024.
+  - **Top 4.2%** Contributor on [LeetCode](https://leetcode.com/Joshua-Shin/) (Consecutive years: 2023, 2024)
     <br><br> ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=Joshua-Shin)
   - **Top 3.5%** on [Baekjoon](https://solved.ac/profile/sjh910805) - Platinum V
     
